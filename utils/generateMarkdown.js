@@ -1,82 +1,141 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+const arrLicenses = [
+  {
+    name: "Apache License 2.0",
+    website: "https://www.apache.org/licenses/LICENSE-2.0",
+    badge: "https://img.shields.io/badge/License-Apache_2.0-blue.svg",
+  },
+  {
+    name: "Boost Software License 1.0",
+    website: "https://www.boost.org/LICENSE_1_0.txt",
+    badge: "https://img.shields.io/badge/License-Boost_1.0-lightblue.svg",
+  },
+  {
+    name: "GNU GPLv3",
+    website: "https://www.gnu.org/licenses/gpl-3.0-standalone.html",
+    badge: "https://img.shields.io/badge/License-GPLv3-blue.svg",
+  },
+  {
+    name: "MIT License",
+    website: "https://opensource.org/licenses/MIT",
+    badge: "https://img.shields.io/badge/License-MIT-yellow.svg",
+  },
+  {
+    name: "Mozilla Public License 2.0",
+    website: "https://www.mozilla.org/en-US/MPL/2.0/",
+    badge: "https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg",
+  },
+  {
+    name: "The Unlicense",
+    website: "https://unlicense.org/",
+    badge: "https://img.shields.io/badge/license-Unlicense-blue.svg",
+  },
+];
+
+/**
+ * Function that returns a license badge based on which license is passed in
+ * If there is no license, returns an empty string
+ * @param {string} license
+ * @returns The License Badge
+ */
 function renderLicenseBadge(license) {
-  if (!license) {
-    return "";
-  } else {
+  let licenseBadge = "";
+  if (license.trim().toLowerCase() !== "none") {
+    // get license object
+    const objLicense = arrLicenses.find(
+      (element) =>
+        element.name.trim().toLowerCase() === license.trim().toLowerCase()
+    );
+    licenseBadge = `[![License:](${objLicense.badge})](${objLicense.website})`;
   }
+  return licenseBadge;
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
+/**
+ * Function that returns the license link.
+ * If there is no license, returns an empty string
+ * @param {string} license
+ * @returns A License Link
+ */
 function renderLicenseLink(license) {
-  if (!license) {
-    return "";
-  } else {
+  let licenseLink = "";
+  if (license.trim().toLowerCase() !== "none") {
+    // get license object
+    const objLicense = arrLicenses.find(
+      (element) =>
+        element.name.trim().toLowerCase() === license.trim().toLowerCase()
+    );
+    licenseLink = `[${objLicense.name}](${objLicense.website})`;
   }
+  return licenseLink;
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
+/**
+ * Function that returns the license section of README
+ * If there is no license, returns an empty string
+ * @param {string} license
+ * @returns The markdown for the License section
+ */
 function renderLicenseSection(license) {
-  if (!license) {
-    return "";
-  } else {
+  let licenseSection = "";
+  if (license.trim().toLowerCase() !== "none") {
+    licenseSection = `## License
+
+${renderLicenseBadge(license)}
+
+This application is covered under the ${renderLicenseLink(license)}`;
   }
+  return licenseSection;
 }
 
 // TODO: Create a function to generate markdown for README
 /**
- *
- * @param {*} data
- * @returns string
+ * Function to generate markdown for README
+ * @param {inquirer response} data
+ * @returns The markdown for the README
  */
 function generateMarkdown(data) {
   return `# ${data.title}
     
-    ## Description
+${renderLicenseBadge(data.license)}
 
-    ${data.description}
+## Description
 
-    ## Table of Contents
+${data.description}
 
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [License](#license)
-    - [Contributing](#contributing)
-    - [Tests](#tests)
-    - [Questions](#questions)
+## Table of Contents
 
-    ## Installation
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
 
-    ${data.installation}
+## Installation
 
-    ## Usage
+${data.installation}
 
-    ${data.usage}
+## Usage
 
-    ## License
+${data.usage}
 
-    The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+${renderLicenseSection(data.license)}
 
-    ${data.license}
+## Contributing
 
-    ## Contributing
+${data.contributing}
 
-    If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+## Tests
 
-    ${data.contributing}
+${data.tests}
 
-    ## Tests
+## Questions
 
-    Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+GitHub Link: [https://github.com/${data.github}](https://github.com/${
+    data.github
+  })
 
-    ${data.tests}
-
-    ## Questions
-
-    GitHub Link: ${data.github}
-    Email: ${data.email}
+Email: ${data.email}
 `;
 }
 
