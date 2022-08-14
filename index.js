@@ -56,6 +56,19 @@ const questions = [
     type: "input",
     message: "Please provide your email address:",
     name: "email",
+    validate: function (email) {
+      //gist.github.com/Amitabh-K/ae073eea3d5207efaddffde19b1618e8
+      https: valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+        email
+      );
+
+      if (valid) {
+        return true;
+      } else {
+        console.log(".  Please enter a valid email.");
+        return false;
+      }
+    },
   },
 ];
 

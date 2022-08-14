@@ -45,7 +45,7 @@ function renderLicenseBadge(license) {
       (element) =>
         element.name.trim().toLowerCase() === license.trim().toLowerCase()
     );
-    licenseBadge = `[![License:](${objLicense.badge})](${objLicense.website})`;
+    licenseBadge = `[![License:](${objLicense.badge})](${objLicense.website})\n\n`;
   }
   return licenseBadge;
 }
@@ -78,11 +78,25 @@ function renderLicenseLink(license) {
 function renderLicenseSection(license) {
   let licenseSection = "";
   if (license.trim().toLowerCase() !== "none") {
-    licenseSection = `## License
+    licenseSection = `\n\n## License
 
 ${renderLicenseBadge(license)}
 
-This application is covered under the ${renderLicenseLink(license)}`;
+This application is covered under the ${renderLicenseLink(license)}.`;
+  }
+  return licenseSection;
+}
+
+/**
+ * Function that returns the license Table of Contents entry of README
+ * If there is no license, returns an empty string
+ * @param {string} license
+ * @returns The markdown for the License Table of Contents entry
+ */
+function renderLicenseTOC(license) {
+  let licenseSection = "";
+  if (license.trim().toLowerCase() !== "none") {
+    licenseSection = `\n- [License](#license)`;
   }
   return licenseSection;
 }
@@ -94,19 +108,15 @@ This application is covered under the ${renderLicenseLink(license)}`;
  * @returns The markdown for the README
  */
 function generateMarkdown(data) {
-  return `# ${data.title}
-    
-${renderLicenseBadge(data.license)}
-
-## Description
+  return `# ${data.title}    
+${renderLicenseBadge(data.license)}## Description
 
 ${data.description}
 
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [License](#license)
+- [Usage](#usage)${renderLicenseTOC(data.license)}
 - [Contributing](#contributing)
 - [Tests](#tests)
 - [Questions](#questions)
@@ -117,9 +127,7 @@ ${data.installation}
 
 ## Usage
 
-${data.usage}
-
-${renderLicenseSection(data.license)}
+${data.usage}${renderLicenseSection(data.license)}
 
 ## Contributing
 
@@ -135,7 +143,7 @@ GitHub Link: [https://github.com/${data.github}](https://github.com/${
     data.github
   })
 
-Email: ${data.email}
+Please contact me at ${data.email} with any additional questions you may have.
 `;
 }
 
