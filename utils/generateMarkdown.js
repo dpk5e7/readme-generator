@@ -80,9 +80,9 @@ function renderLicenseSection(license) {
   if (license.trim().toLowerCase() !== "none") {
     licenseSection = `\n\n## License
 
-${renderLicenseBadge(license)}
-
-This application is covered under the ${renderLicenseLink(license)}.`;
+${renderLicenseBadge(
+  license
+)}This application is covered under the ${renderLicenseLink(license)}.`;
   }
   return licenseSection;
 }
