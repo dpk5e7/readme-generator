@@ -9,27 +9,27 @@ const questions = [
     name: "title",
   },
   {
-    type: "input",
+    type: "editor",
     message: "Please describe your project:",
     name: "description",
   },
   {
-    type: "input",
+    type: "editor",
     message: "Please provide installation instructions:",
     name: "installation",
   },
   {
-    type: "input",
+    type: "editor",
     message: "Please provide usage information:",
     name: "usage",
   },
   {
-    type: "input",
+    type: "editor",
     message: "Please provide contribution guidelines:",
     name: "contributing",
   },
   {
-    type: "input",
+    type: "editor",
     message: "Please provide test instructions:",
     name: "tests",
   },
