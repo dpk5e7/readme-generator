@@ -38,12 +38,9 @@ THEN I am taken to the corresponding section of the README
 
 ## Table of Contents
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
-- [Badging](#badging)
 - [Contributing](#contributing)
 - [Tests](#tests)
 - [Questions](#questions)
@@ -70,6 +67,8 @@ node index.js
 ![Screenshot1](./assets/images/screenshot1.png)
 
 ![Screenshot2](./assets/images/screenshot2.png)
+
+[VideoLink](https://drive.google.com/file/d/1LJ5ZtePTlNgvUbgF4MprjzDfZ5E6CL5p/view?usp=sharing)
 
 ## License
 
